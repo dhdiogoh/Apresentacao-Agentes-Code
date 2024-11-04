@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox Mockup - Futurista</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            position: relative;
+            width: 1200px;
+            height: 850px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chatbox {
+            width: 450px;
+            height: 800px;
+            background-color: #1f1f1f;
+            border-radius: 20px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            margin-right: 250px;
+        }
+
+        .chat-header {
+            background-color: #4E009C;
+            color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #7130B5;
+        }
+
+        .contact-name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .chat-content {
+            flex: 1;
+            padding: 15px;
+            background-color: #2b2b2b;
+            overflow-y: auto;
+        }
+
+        .message {
+            background-color: #4E009C;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            max-width: 70%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background-color: #7130B5;
+        }
+
+        .message.received {
+            align-self: flex-end;
+            background-color: #ffffff;
+            color: #4E009C;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 15px;
+            background-color: #4E009C;
+            align-items: center;
+        }
+
+        #message {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            background-color: #ffffff;
+            color: #4E009C;
+        }
+
+        #send-button {
+            background-color: #7130B5;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #send-button:hover {
+            background-color: #4E009C;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+        }
+
+        .panel img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .panel-name {
+            font-weight: bold;
+            color: #1f1f1f;
+        }
+
+        .left-panel {
+            left: 100px;
+            top: 150px;
+        }
+
+        .right-panel {
+            right: 200px;
+            top: 150px;
+        }
+
+        .functions-panel {
+            position: absolute;
+            right: 50px;
+            top: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .functions-panel-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .function-box {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .function-box img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .function-box.memoria {
+            background-color: #b0e8d0;
+        }
+
+        .function-box.treinamento {
+            background-color: #d0f0ff;
+        }
+
+        /* Hover pulsante para as funções do agente IA */
+        .function-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Tooltip para funções do agente IA */
+        .tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            color: #4E009C;
+            padding: 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .function-box:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Animação de pulsar */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 1s infinite;
+        }
+
+        /* Tooltip personalizado para Cliente e Agente IA */
+        .panel .tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            color: #4E009C;
+            padding: 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Cliente Panel -->
+        <div class="left-panel panel" id="cliente-panel">
+            <img src="emoji_cliente.png" alt="Cliente Emoji">
+            <div class="panel-name">Cliente</div>
+            <div class="tooltip" id="cliente-tooltip">💬 Digitando...</div>
+        </div>
+
+        <!-- Chatbox -->
+        <div class="chatbox">
+            <div class="chat-header">
+                <div class="contact-info">
+                    <img src="emoji_cliente.png" class="avatar" alt="Profile Picture">
+                    <div class="contact-name">Cliente</div>
+                </div>
+            </div>
+            <div class="chat-content" id="chat-content">
+                <!-- Mensagens do chat -->
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="message" placeholder="Digite uma mensagem...">
+                <button id="send-button">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Agente IA Panel -->
+        <div class="right-panel panel" id="agente-ia-panel">
+            <img src="emoji_agente_ia.png" alt="Agente IA Emoji">
+            <div class="panel-name">Agente IA</div>
+            <div class="tooltip" id="agente-tooltip">🤖 Processando...</div>
+        </div>
+
+        <!-- Functions Panel -->
+        <div class="functions-panel">
+            <div class="functions-panel-row">
+                <div class="function-box">
+                    <img src="emoji_agente_ia.png" alt="Função Preço">
+                    <div class="panel-name">Preço</div>
+                    <div class="tooltip">💲 Acessando preço...</div>
+                </div>
+                <div class="function-box">
+                    <img src="emoji_agente_ia.png" alt="Função Texto">
+                    <div class="panel-name">Texto</div>
+                    <div class="tooltip">✍️ Escrevendo texto...</div>
+                </div>
+                <div class="function-box">
+                    <img src="emoji_agente_ia.png" alt="Função Marketing">
+                    <div class="panel-name">Marketing</div>
+                    <div class="tooltip">📊 Acessando marketing...</div>
+                </div>
+            </div>
+            <div class="functions-panel-row">
+                <div class="function-box">
+                    <img src="emoji_agente_ia.png" alt="Função Aprimorar">
+                    <div class="panel-name">Aprimorar</div>
+                    <div class="tooltip">🔧 Aprimorando texto...</div>
+                </div>
+            </div>
+            <div class="functions-panel-row">
+                <div class="function-box memoria">
+                    <img src="emoji_memoria.png" alt="Função Memória">
+                    <div class="panel-name">Memória</div>
+                    <div class="tooltip">🧠 Acessando memória...</div>
+                </div>
+                <div class="function-box treinamento">
+                    <img src="emoji_treinamento.png" alt="Função Treinamento">
+                    <div class="panel-name">Treinamento</div>
+                    <div class="tooltip">📚 Acessando treinamento...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clientMessageIndex = 0;
+        let agentMessageIndex = 0;
+
+        const clientMessages = [
+            "Oi, tudo bem?",
+            "Vocês fazem limpeza dentária?",
+            "Quanto custa a consulta inicial?"
+        ];
+
+        const agentMessages = [
+            "Olá! Tudo ótimo, como posso ajudar?",
+            "Sim, realizamos procedimentos de limpeza dentária. Gostaria de agendar uma consulta?",
+            "A consulta inicial custa R$ 150,00. Podemos agendar para um horário que seja conveniente para você."
+        ];
+
+        document.getElementById("send-button").addEventListener("click", function () {
+            const messageInput = document.getElementById("message");
+            const messageText = messageInput.value;
+            if (messageText.trim() !== "") {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("message", "sent");
+                const clientImage = document.createElement("img");
+                clientImage.src = "emoji_cliente.png";
+                clientImage.alt = "Cliente Emoji";
+                clientImage.style.width = "30px";
+                clientImage.style.height = "30px";
+                messageElement.appendChild(clientImage);
+                const messageTextElement = document.createElement("span");
+                messageTextElement.textContent = messageText;
+                messageElement.appendChild(messageTextElement);
+                document.getElementById("chat-content").appendChild(messageElement);
+                messageInput.value = "";
+                document.getElementById("chat-content").scrollTop = document.getElementById("chat-content").scrollHeight;
+                messageElement.style.transform = "scale(0.9)";
+                setTimeout(() => {
+                    messageElement.style.transform = "scale(1)";
+                }, 10);
+            }
+
+            // Se o cliente estiver pulsando, envia a próxima mensagem do cliente
+            if (document.getElementById("cliente-panel").classList.contains("pulse-animation")) {
+                if (clientMessageIndex < clientMessages.length) {
+                    const clientMessage = document.createElement("div");
+                    clientMessage.classList.add("message", "sent");
+                    const clientImage = document.createElement("img");
+                    clientImage.src = "emoji_cliente.png";
+                    clientImage.alt = "Cliente Emoji";
+                    clientImage.style.width = "30px";
+                    clientImage.style.height = "30px";
+                    clientMessage.appendChild(clientImage);
+                    const clientText = document.createElement("span");
+                    clientText.textContent = clientMessages[clientMessageIndex];
+                    clientMessage.appendChild(clientText);
+                    document.getElementById("chat-content").appendChild(clientMessage);
+                    document.getElementById("chat-content").scrollTop = document.getElementById("chat-content").scrollHeight;
+                    document.getElementById("cliente-panel").classList.remove("pulse-animation");
+                    document.getElementById("cliente-tooltip").style.opacity = "0";
+                    clientMessage.style.transform = "scale(0.9)";
+                    setTimeout(() => {
+                        clientMessage.style.transform = "scale(1)";
+                    }, 10);
+                    clientMessageIndex++;
+                }
+            }
+
+            // Se o agente IA estiver pulsando, envia a próxima resposta do agente IA
+            if (document.getElementById("agente-ia-panel").classList.contains("pulse-animation")) {
+                if (agentMessageIndex < agentMessages.length) {
+                    const agentMessage = document.createElement("div");
+                    agentMessage.classList.add("message", "received");
+                    const agentImage = document.createElement("img");
+                    agentImage.src = "emoji_agente_ia.png";
+                    agentImage.alt = "Agente IA Emoji";
+                    agentImage.style.width = "30px";
+                    agentImage.style.height = "30px";
+                    agentMessage.appendChild(agentImage);
+                    const agentText = document.createElement("span");
+                    agentText.textContent = agentMessages[agentMessageIndex];
+                    agentMessage.appendChild(agentText);
+                    document.getElementById("chat-content").appendChild(agentMessage);
+                    document.getElementById("chat-content").scrollTop = document.getElementById("chat-content").scrollHeight;
+                    document.getElementById("agente-ia-panel").classList.remove("pulse-animation");
+                    document.getElementById("agente-tooltip").style.opacity = "0";
+                    agentMessage.style.transform = "scale(0.9)";
+                    setTimeout(() => {
+                        agentMessage.style.transform = "scale(1)";
+                    }, 10);
+                    agentMessageIndex++;
+                }
+            }
+        });
+
+        document.getElementById("message").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send-button").click();
+            }
+        });
+
+        // Animações de pulsar ao clicar em Cliente e Agente IA
+        document.getElementById("cliente-panel").addEventListener("click", function () {
+            this.classList.toggle("pulse-animation");
+            const tooltip = document.getElementById("cliente-tooltip");
+            tooltip.style.opacity = tooltip.style.opacity === "1" ? "0" : "1";
+        });
+
+        document.getElementById("agente-ia-panel").addEventListener("click", function () {
+            this.classList.toggle("pulse-animation");
+            const tooltip = document.getElementById("agente-tooltip");
+            tooltip.style.opacity = tooltip.style.opacity === "1" ? "0" : "1";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inove Seu Atendimento Ao Cliente</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            color: white;
+            background: url('./galaxia-roxa.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(78, 0, 156, 0.5), rgba(0, 0, 0, 0.7));
+            background-size: 400% 400%;
+            animation: gradientAnimation 20s ease infinite;
+            z-index: 1;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            transition: opacity 1s ease;
+            background: none;
+        }
+
+        .content h1 {
+            font-size: 3.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .content p {
+            font-size: 1.5rem;
+        }
+
+        .highlight {
+            color: white;
+        }
+
+        #anterior {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #4E009C;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 3;
+        }
+
+        #proximo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4E009C;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 3;
+        }
+
+        button:hover {
+            background-color: #5e10b8;
+            transform: scale(1.1);
+        }
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .video-container,
+        .blank-container {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            width: 60%;
+            /* Diminuído um pouco o tamanho do vídeo */
+            height: 60%;
+            /* Diminuído um pouco o tamanho do vídeo */
+            transition: opacity 1s ease;
+            opacity: 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .blank-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./logo-completo-branco.png" alt="Logo da Empresa"
+        style="position: absolute; top: 10px; left: 10px; width: 150px; z-index: 4;">
+
+    <div class="container" id="content-container">
+        <div class="content">
+            <h1>Inove Seu Atendimento Ao Cliente Com <span class="highlight">Funcionários De IA</span></h1>
+            <p>Tenha agentes de IA respondendo seu WhatsApp, Instagram, Facebook e loja virtual de forma autônoma e
+                humanizada.</p>
+        </div>
+    </div>
+
+    <div class="video-container" id="video-container">
+        <iframe id="video-iframe" src="https://www.youtube.com/embed/0SRVJaOg9Co" allowfullscreen></iframe>
+    </div>
+
+    <div class="blank-container" id="blank-container">
+        <iframe src="chat.html"></iframe>
+    </div>
+
+    <button id="anterior" onclick="showPrevious()">Anterior</button>
+    <button id="proximo" onclick="showNext()">Próximo</button>
+    <canvas id="background"></canvas>
+    <script>
+        const canvas = document.getElementById('background');
+        const ctx = canvas.getContext('2d');
+        const contentContainer = document.getElementById('content-container');
+        const videoContainer = document.getElementById('video-container');
+        const blankContainer = document.getElementById('blank-container');
+        const videoIframe = document.getElementById('video-iframe');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let stars = [];
+        let comets = [];
+        let hue = 250;
+
+        function init() {
+            for (let i = 0; i < 150; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    color: `hsl(${hue}, 100%, ${Math.random() * 50 + 50}%)`,
+                    speed: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = star.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = "white";
+                ctx.fill();
+                star.x += star.speed;
+
+                if (star.x > canvas.width) {
+                    star.x = 0;
+                    star.y = Math.random() * canvas.height;
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        function showVideo() {
+            contentContainer.style.opacity = '0';
+            setTimeout(() => {
+                contentContainer.style.display = 'none';
+                videoContainer.style.display = 'block';
+                videoContainer.style.opacity = '0';
+                setTimeout(() => {
+                    videoContainer.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        function showContent() {
+            videoContainer.style.opacity = '0';
+            setTimeout(() => {
+                videoContainer.style.display = 'none';
+                contentContainer.style.display = 'block';
+                contentContainer.style.opacity = '0';
+                setTimeout(() => {
+                    contentContainer.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        function showBlank() {
+            contentContainer.style.opacity = '0';
+            videoContainer.style.opacity = '0';
+            setTimeout(() => {
+                contentContainer.style.display = 'none';
+                videoContainer.style.display = 'none';
+                blankContainer.style.display = 'block';
+                blankContainer.style.opacity = '0';
+                setTimeout(() => {
+                    blankContainer.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        function showNext() {
+            if (contentContainer.style.display !== 'none') {
+                showVideo();
+            } else if (videoContainer.style.display !== 'none') {
+                showBlank();
+            }
+        }
+
+        function showPrevious() {
+            if (blankContainer.style.display !== 'none') {
+                blankContainer.style.opacity = '0';
+                setTimeout(() => {
+                    blankContainer.style.display = 'none';
+                    videoContainer.style.display = 'block';
+                    videoContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        videoContainer.style.opacity = '1';
+                    }, 50);
+                }, 1000);
+            } else if (videoContainer.style.display !== 'none') {
+                showContent();
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            init();
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+
+</html>

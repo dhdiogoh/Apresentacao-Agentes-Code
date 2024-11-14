@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>Inove Seu Atendimento Ao Cliente</title>
     <style>
         body,
@@ -58,24 +59,26 @@
         }
 
         .content h1 {
-            font-size: 3.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
             font-weight: bold;
             color: white;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .content p {
-            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
         }
 
         .highlight {
             color: white;
         }
 
-        #anterior {
+        #anterior,
+        #proximo {
             position: fixed;
             bottom: 20px;
-            left: 20px;
             background-color: #4E009C;
             color: white;
             border: none;
@@ -87,19 +90,12 @@
             z-index: 3;
         }
 
+        #anterior {
+            left: 20px;
+        }
+
         #proximo {
-            position: fixed;
-            bottom: 20px;
             right: 20px;
-            background-color: #4E009C;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            border-radius: 30px;
-            transition: transform 0.3s, background-color 0.3s;
-            z-index: 3;
         }
 
         button:hover {
@@ -124,12 +120,19 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
-            width: 60%;
-            /* Diminuído um pouco o tamanho do vídeo */
-            height: 60%;
-            /* Diminuído um pouco o tamanho do vídeo */
             transition: opacity 1s ease;
             opacity: 0;
+        }
+
+        .video-container {
+            width: 80%;
+            max-width: 1200px;
+            height: auto;
+            aspect-ratio: 16/9;
+            /* Mantém a proporção do vídeo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .video-container iframe {
@@ -138,12 +141,16 @@
             border: none;
         }
 
+        .blank-container {
+            width: 100%;
+            height: 100%;
+        }
+
         .blank-container iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 25px;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
     </style>
 </head>
@@ -154,9 +161,11 @@
 
     <div class="container" id="content-container">
         <div class="content">
-            <h1>Inove Seu Atendimento Ao Cliente Com <span class="highlight">Funcionários De IA</span></h1>
-            <p>Tenha agentes de IA respondendo seu WhatsApp, Instagram, Facebook e loja virtual de forma autônoma e
-                humanizada.</p>
+            <h1>Transforme seu Atendimento com <span class="highlight">IA:</span> Um Segundo Cérebro para
+                sua Empresa
+            </h1>
+            <p>Com o Agente IA Bermax é possível automatizar o seu WhatsApp, garantindo atendimento rápido, eficiente e
+                humanizado</p>
         </div>
     </div>
 
@@ -177,14 +186,11 @@
         const contentContainer = document.getElementById('content-container');
         const videoContainer = document.getElementById('video-container');
         const blankContainer = document.getElementById('blank-container');
-        const videoIframe = document.getElementById('video-iframe');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         let stars = [];
-        let comets = [];
-        let hue = 250;
 
         function init() {
             for (let i = 0; i < 150; i++) {
@@ -192,7 +198,7 @@
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     radius: Math.random() * 2 + 1,
-                    color: `hsl(${hue}, 100%, ${Math.random() * 50 + 50}%)`,
+                    color: `hsl(250, 100%, ${Math.random() * 50 + 50}%)`,
                     speed: Math.random() * 0.5 + 0.2
                 });
             }
@@ -222,7 +228,7 @@
             contentContainer.style.opacity = '0';
             setTimeout(() => {
                 contentContainer.style.display = 'none';
-                videoContainer.style.display = 'block';
+                videoContainer.style.display = 'flex';
                 videoContainer.style.opacity = '0';
                 setTimeout(() => {
                     videoContainer.style.opacity = '1';
@@ -269,7 +275,7 @@
                 blankContainer.style.opacity = '0';
                 setTimeout(() => {
                     blankContainer.style.display = 'none';
-                    videoContainer.style.display = 'block';
+                    videoContainer.style.display = 'flex';
                     videoContainer.style.opacity = '0';
                     setTimeout(() => {
                         videoContainer.style.opacity = '1';

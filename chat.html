@@ -18,35 +18,35 @@
 
         .container {
             position: relative;
-            width: 1200px;
-            height: 850px;
+            width: 1080px;
+            height: 765px;
             background-color: #ffffff;
-            border-radius: 25px;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 22.5px;
+            box-shadow: 0px 0px 27px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 18px;
         }
 
         .chatbox {
-            width: 450px;
-            height: 800px;
+            width: 405px;
+            height: 720px;
             background-color: #1f1f1f;
-            border-radius: 20px;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            box-shadow: 0px 0px 27px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
             z-index: 2;
-            margin-right: 250px;
+            margin-right: 225px;
         }
 
         .chat-header {
             background-color: #4E009C;
             color: #ffffff;
-            padding: 20px;
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -58,11 +58,11 @@
         }
 
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #7130B5;
+            margin-right: 13.5px;
+            border: 1.8px solid #7130B5;
         }
 
         .contact-name {
@@ -72,7 +72,7 @@
 
         .chat-content {
             flex: 1;
-            padding: 15px;
+            padding: 13.5px;
             background-color: #2b2b2b;
             overflow-y: auto;
         }
@@ -80,13 +80,13 @@
         .message {
             background-color: #4E009C;
             color: #ffffff;
-            padding: 10px 15px;
-            border-radius: 15px;
-            margin: 10px 0;
-            max-width: 70%;
+            padding: 9px 13.5px;
+            border-radius: 13.5px;
+            margin: 9px 0;
+            max-width: 63%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             transition: transform 0.3s ease;
         }
 
@@ -105,16 +105,16 @@
 
         .chat-footer {
             display: flex;
-            padding: 15px;
+            padding: 13.5px;
             background-color: #4E009C;
             align-items: center;
         }
 
         #message {
             flex: 1;
-            padding: 10px;
+            padding: 9px;
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             outline: none;
             background-color: #ffffff;
             color: #4E009C;
@@ -124,9 +124,9 @@
             background-color: #7130B5;
             color: white;
             border: none;
-            border-radius: 20px;
-            padding: 10px 15px;
-            margin-left: 10px;
+            border-radius: 18px;
+            padding: 9px 13.5px;
+            margin-left: 9px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -143,9 +143,9 @@
         }
 
         .panel img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
+            width: 54px;
+            height: 54px;
+            margin-bottom: 9px;
             cursor: pointer;
         }
 
@@ -155,49 +155,49 @@
         }
 
         .left-panel {
-            left: 100px;
-            top: 150px;
+            left: 90px;
+            top: 135px;
         }
 
         .right-panel {
-            right: 200px;
-            top: 150px;
+            right: 180px;
+            top: 135px;
         }
 
         .functions-panel {
             position: absolute;
-            right: 50px;
-            top: 300px;
+            right: 45px;
+            top: 270px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 13.5px;
         }
 
         .functions-panel-row {
             display: flex;
-            gap: 20px;
+            gap: 18px;
         }
 
         .function-box {
             position: relative;
-            width: 90px;
-            height: 90px;
+            width: 81px;
+            height: 81px;
             background-color: #f0f0f0;
-            border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 13.5px;
+            box-shadow: 0px 0px 13.5px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 9px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .function-box img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
+            width: 45px;
+            height: 45px;
+            margin-bottom: 9px;
         }
 
         .function-box.memoria {
@@ -211,20 +211,20 @@
         /* Hover pulsante para as funções do agente IA */
         .function-box:hover {
             transform: scale(1.1);
-            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 0px 22.5px rgba(0, 0, 0, 0.4);
         }
 
         /* Tooltip para funções do agente IA */
         .tooltip {
             position: absolute;
-            bottom: 110%;
+            bottom: 99%;
             left: 50%;
             transform: translateX(-50%);
             background-color: #ffffff;
             color: #4E009C;
-            padding: 5px 10px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            padding: 4.5px 9px;
+            border-radius: 9px;
+            box-shadow: 0px 0px 13.5px rgba(0, 0, 0, 0.2);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -257,14 +257,14 @@
         /* Tooltip personalizado para Cliente e Agente IA */
         .panel .tooltip {
             position: absolute;
-            bottom: 110%;
+            bottom: 99%;
             left: 50%;
             transform: translateX(-50%);
             background-color: #ffffff;
             color: #4E009C;
-            padding: 5px 10px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            padding: 4.5px 9px;
+            border-radius: 9px;
+            box-shadow: 0px 0px 13.5px rgba(0, 0, 0, 0.2);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -373,8 +373,8 @@
                 const clientImage = document.createElement("img");
                 clientImage.src = "emoji_cliente.png";
                 clientImage.alt = "Cliente Emoji";
-                clientImage.style.width = "30px";
-                clientImage.style.height = "30px";
+                clientImage.style.width = "27px";
+                clientImage.style.height = "27px";
                 messageElement.appendChild(clientImage);
                 const messageTextElement = document.createElement("span");
                 messageTextElement.textContent = messageText;
@@ -396,8 +396,8 @@
                     const clientImage = document.createElement("img");
                     clientImage.src = "emoji_cliente.png";
                     clientImage.alt = "Cliente Emoji";
-                    clientImage.style.width = "30px";
-                    clientImage.style.height = "30px";
+                    clientImage.style.width = "27px";
+                    clientImage.style.height = "27px";
                     clientMessage.appendChild(clientImage);
                     const clientText = document.createElement("span");
                     clientText.textContent = clientMessages[clientMessageIndex];
@@ -422,8 +422,8 @@
                     const agentImage = document.createElement("img");
                     agentImage.src = "emoji_agente_ia.png";
                     agentImage.alt = "Agente IA Emoji";
-                    agentImage.style.width = "30px";
-                    agentImage.style.height = "30px";
+                    agentImage.style.width = "27px";
+                    agentImage.style.height = "27px";
                     agentMessage.appendChild(agentImage);
                     const agentText = document.createElement("span");
                     agentText.textContent = agentMessages[agentMessageIndex];
